@@ -1,27 +1,10 @@
-import { constant, get, head, isEmpty, isFunction } from 'lodash-es'
-
-export const createValue = (source, parameters) => {
-    if (isEmpty(parameters)) {
-        return source
-    }
-
-    return get(source, head(parameters))
-}
-
-export const createUse = value => {
-    if (isFunction(value)) {
-        return value
-    }
-
-    return constant(value)
-}
+import { useConstant } from '@/constant'
+import { isEmpty } from '@mpietrucha/is'
 
 export const use = (source, ...parameters) => {
-    const value = createValue(source, parameters)
-
-    if (value === source) {
-        return createUse(value)
+    if (isEmpty(parameters)) {
+        return useConstant(source)
     }
 
-    return createUse(value).bind(source)
+    return use(useProperty(source, parameters.shift())).bind(source)
 }

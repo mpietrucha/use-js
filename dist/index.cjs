@@ -1,27 +1,21 @@
 'use strict';
 
+const is = require('@mpietrucha/is');
 const lodashEs = require('lodash-es');
 
-const createValue = (source, parameters) => {
-  if (lodashEs.isEmpty(parameters)) {
-    return source;
-  }
-  return lodashEs.get(source, lodashEs.head(parameters));
-};
-const createUse = (value) => {
-  if (lodashEs.isFunction(value)) {
+const useConstant = (value) => {
+  if (is.is(value, Function)) {
     return value;
   }
   return lodashEs.constant(value);
 };
+
 const use = (source, ...parameters) => {
-  const value = createValue(source, parameters);
-  if (value === source) {
-    return createUse(value);
+  if (is.isEmpty(parameters)) {
+    return useConstant(source);
   }
-  return createUse(value).bind(source);
+  return use(useProperty(source, parameters.shift())).bind(source);
 };
 
-exports.createUse = createUse;
-exports.createValue = createValue;
 exports.use = use;
+exports.useConstant = useConstant;
