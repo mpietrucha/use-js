@@ -1,6 +1,5 @@
-import { is } from '@mpietrucha/is';
+import { is, createNone, isNone } from '@mpietrucha/is';
 import { constant, partialRight, get } from 'lodash-es';
-import { createNone, isNone } from '@mpietrucha/none';
 
 const createConstant$1 = (value) => {
   if (is(value, Function)) {

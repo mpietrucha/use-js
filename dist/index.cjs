@@ -2,7 +2,6 @@
 
 const is = require('@mpietrucha/is');
 const lodashEs = require('lodash-es');
-const none = require('@mpietrucha/none');
 
 const createConstant$1 = (value) => {
   if (is.is(value, Function)) {
@@ -11,8 +10,8 @@ const createConstant$1 = (value) => {
   return lodashEs.constant(value);
 };
 
-const use = (source, property = none.createNone()) => {
-  if (none.isNone(property)) {
+const use = (source, property = is.createNone()) => {
+  if (is.isNone(property)) {
     return createConstant(source);
   }
   const value = lodashEs.get(source, property);
