@@ -1,2 +1,2 @@
-export { useConstant } from '@/constant'
-export { use } from '@/use'
+export { createConstant } from '@/constant'
+export { createUse, use } from '@/use'

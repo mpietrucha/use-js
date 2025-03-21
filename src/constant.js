@@ -1,7 +1,7 @@
 import { is } from '@mpietrucha/is'
 import { constant } from 'lodash-es'
 
-export const useConstant = value => {
+export const createConstant = value => {
     if (is(value, Function)) {
         return value
     }
