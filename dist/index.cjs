@@ -2,20 +2,26 @@
 
 const is = require('@mpietrucha/is');
 const lodashEs = require('lodash-es');
+const none = require('@mpietrucha/none');
 
-const useConstant = (value) => {
+const createConstant$1 = (value) => {
   if (is.is(value, Function)) {
     return value;
   }
   return lodashEs.constant(value);
 };
 
-const use = (source, ...parameters) => {
-  if (is.isEmpty(parameters)) {
-    return useConstant(source);
+const use = (source, property = none.createNone()) => {
+  if (none.isNone(property)) {
+    return createConstant(source);
   }
-  return use(useProperty(source, parameters.shift())).bind(source);
+  const value = lodashEs.get(source, property);
+  return use(value).bind(source);
+};
+const createUse = (property) => {
+  return lodashEs.partialRight(use, property);
 };
 
+exports.createConstant = createConstant$1;
+exports.createUse = createUse;
 exports.use = use;
-exports.useConstant = useConstant;

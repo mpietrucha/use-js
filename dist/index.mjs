@@ -1,18 +1,23 @@
-import { is, isEmpty } from '@mpietrucha/is';
-import { constant } from 'lodash-es';
+import { is } from '@mpietrucha/is';
+import { constant, partialRight, get } from 'lodash-es';
+import { createNone, isNone } from '@mpietrucha/none';
 
-const useConstant = (value) => {
+const createConstant$1 = (value) => {
   if (is(value, Function)) {
     return value;
   }
   return constant(value);
 };
 
-const use = (source, ...parameters) => {
-  if (isEmpty(parameters)) {
-    return useConstant(source);
+const use = (source, property = createNone()) => {
+  if (isNone(property)) {
+    return createConstant(source);
   }
-  return use(useProperty(source, parameters.shift())).bind(source);
+  const value = get(source, property);
+  return use(value).bind(source);
+};
+const createUse = (property) => {
+  return partialRight(use, property);
 };
 
-export { use, useConstant };
+export { createConstant$1 as createConstant, createUse, use };
