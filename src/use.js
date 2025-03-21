@@ -1,4 +1,4 @@
-import { createNone, isNone } from '@mpietrucha/none'
+import { createNone, isNone } from '@mpietrucha/is'
 import { partialRight as createComposition, get } from 'lodash-es'
 
 export const use = (source, property = createNone()) => {
