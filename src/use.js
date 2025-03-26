@@ -1,14 +1,14 @@
 import { useConstant } from '@/constant'
 import { useFinishComposition } from '@mpietrucha/function'
-import { isNone, none } from '@mpietrucha/none'
+import { isEmpty } from '@mpietrucha/is-basic'
 import { constant } from '@mpietrucha/value'
 
-export const use = (source, property = none()) => {
-    if (isNone(property)) {
+export const use = (source, ...property) => {
+    if (isEmpty(property)) {
         return constant(source)
     }
 
-    return useConstant(source, property).bind(source)
+    return useConstant(source, property.shift()).bind(source)
 }
 
 export const createUseComposition = property => {
