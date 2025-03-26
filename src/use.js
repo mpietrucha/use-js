@@ -1,17 +1,16 @@
-import { createConstant } from '@/constant'
-import { createNone, isNone } from '@mpietrucha/is'
-import { partialRight as createComposition, get } from 'lodash-es'
+import { useConstant } from '@/constant'
+import { useFinishComposition } from '@mpietrucha/function'
+import { isNone, none } from '@mpietrucha/none'
+import { constant } from '@mpietrucha/value'
 
-export const use = (source, property = createNone()) => {
+export const use = (source, property = none()) => {
     if (isNone(property)) {
-        return createConstant(source)
+        return constant(source)
     }
 
-    const value = get(source, property)
-
-    return use(value).bind(source)
+    return useConstant(source, property).bind(source)
 }
 
-export const createUse = property => {
-    return createComposition(use, property)
+export const createUseComposition = property => {
+    return useFinishComposition(use, property)
 }

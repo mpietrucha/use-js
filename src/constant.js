@@ -1,10 +1,8 @@
-import { is } from '@mpietrucha/is'
-import { constant } from 'lodash-es'
+import { constant } from '@mpietrucha/value'
+import { get } from 'lodash-es'
 
-export const createConstant = value => {
-    if (is(value, Function)) {
-        return value
-    }
+export const useConstant = (source, property) => {
+    const value = get(source, property)
 
     return constant(value)
 }
