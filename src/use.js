@@ -1,7 +1,7 @@
 import { useConstant } from '@/constant'
 import { useFinishComposition } from '@mpietrucha/function'
 import { isEmpty } from '@mpietrucha/is-basic'
-import { constant } from '@mpietrucha/value'
+import { useConstant as constant } from '@mpietrucha/value'
 
 export const use = (source, ...property) => {
     if (isEmpty(property)) {
