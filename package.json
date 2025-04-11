@@ -29,7 +29,7 @@
         "@mpietrucha/function": "^0.0.2",
         "@mpietrucha/is-basic": "^0.0.5",
         "@mpietrucha/object": "^0.0.1",
-        "@mpietrucha/value": "^0.0.4"
+        "@mpietrucha/value": "^0.0.5"
     },
     "devDependencies": {
         "@mpietrucha/prettier": "^1.0.0",
